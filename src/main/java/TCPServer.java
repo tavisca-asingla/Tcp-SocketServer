@@ -1,3 +1,6 @@
+//shamstabish
+import org.apache.log4j.BasicConfigurator;
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -5,19 +8,20 @@ import java.net.Socket;
 public class TCPServer {
 
     public static void main(String[] args) throws IOException {
-        System.out.println("inside Server");
+        BasicConfigurator.configure();
+        Logger.logInfo(TCPServer.class,"Inside Server");
 
         ServerSocket serverSocket = new ServerSocket(80);
         try {
             while(true) {
-                Thread t = new Thread(new SocketThread(serverSocket));
+                Socket socket = serverSocket.accept();
+                Thread t = new Thread(new SocketThread(socket));
                 t.start();
             }
         }
         finally {
             serverSocket.close();
         }
-
 
 
     }

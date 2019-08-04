@@ -19,6 +19,7 @@ public class HTMLFileContentsHandler {
         String contents = sb.toString();
         fileInputStream.close();
         bufferedReader.close();
+        Logger.logInfo(HTMLFileContentsHandler.class,"Parsed Html File Contents");
         return contents;
     }
 }
